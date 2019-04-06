@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">GDG-Navigation-Sample</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">SOUP</string>
+    <string name="nav_header_subtitle">soupyong@gmail.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+</resources>
