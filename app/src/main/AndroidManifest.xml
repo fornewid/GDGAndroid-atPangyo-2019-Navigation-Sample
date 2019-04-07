@@ -3,7 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="soup.gdg.navigation.sample">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".SampleApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,8 +15,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
+            android:name=".ui.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +23,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.web.WebActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.ExternalLoginActivity"
+            android:label="@string/external_app_name"
+            android:exported="false"
+            android:taskAffinity=":external" />
     </application>
 
 </manifest>

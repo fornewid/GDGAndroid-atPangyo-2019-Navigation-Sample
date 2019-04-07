@@ -1,9 +1,18 @@
 <resources>
     <string name="app_name">GDG-Navigation-Sample</string>
+    <string name="external_app_name">External Login</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
     <string name="nav_header_title">SOUP</string>
     <string name="nav_header_subtitle">soupyong@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+    <string name="title_login">Login</string>
+    <string name="title_home">Home</string>
+    <string name="title_bookmark">Bookmark</string>
+    <string name="title_detail">Detail</string>
+    <string name="title_settings">Settings</string>
+
 </resources>
