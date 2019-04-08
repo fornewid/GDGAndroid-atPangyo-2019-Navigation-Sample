@@ -7,7 +7,6 @@
     <string name="nav_header_title">SOUP</string>
     <string name="nav_header_subtitle">soupyong@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
     <string name="title_login">Login</string>
     <string name="title_home">Home</string>
