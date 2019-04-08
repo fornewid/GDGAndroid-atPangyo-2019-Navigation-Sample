@@ -29,9 +29,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.ExternalLoginActivity"
-            android:label="@string/external_app_name"
             android:exported="false"
-            android:taskAffinity=":external" />
+            android:label="@string/external_app_name"
+            android:taskAffinity=":external"
+            android:theme="@style/ExternalAppTheme" />
     </application>
 
 </manifest>

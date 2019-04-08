@@ -24,6 +24,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        toolbar.setTitle(R.string.title_login)
         skipButton.setOnClickListener {
             findNavController().navigate(
                 LoginFragmentDirections.actionToHome()
