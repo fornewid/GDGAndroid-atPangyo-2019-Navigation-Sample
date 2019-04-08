@@ -31,7 +31,7 @@ class BookmarkFragment : Fragment(), OnBackPressedListener {
             override fun onItemClicked(itemId: Int) {
                 drawerLayout.closeDrawer(GravityCompat.START)
                 when (itemId) {
-                    R.id.nav_home -> findNavController().navigateUp()
+                    R.id.nav_home -> findNavController().popBackStack(R.id.home, false)
                     R.id.nav_settings -> findNavController().navigate(
                         BookmarkFragmentDirections.actionToSettings()
                     )
