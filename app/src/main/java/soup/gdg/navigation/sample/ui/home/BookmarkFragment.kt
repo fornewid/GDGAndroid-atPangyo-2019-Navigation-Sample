@@ -1,4 +1,4 @@
-package soup.gdg.navigation.sample.ui.bookmark
+package soup.gdg.navigation.sample.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,10 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home_content.*
+import soup.gdg.navigation.sample.Dependency
+import soup.gdg.navigation.sample.NavigationDirections
 import soup.gdg.navigation.sample.R
 import soup.gdg.navigation.sample.ui.OnBackPressedListener
 import soup.gdg.navigation.sample.ui.OnNavigationViewClickListener
@@ -17,6 +19,12 @@ import soup.gdg.navigation.sample.ui.setOnNavigationViewClickListener
 import soup.gdg.navigation.sample.util.lazyUnsafe
 
 class BookmarkFragment : Fragment(), OnBackPressedListener {
+
+    private val listAdapter = MovieListAdapter { movie ->
+        findNavController().navigate(
+            NavigationDirections.actionToDetail(movie.id)
+        )
+    }
 
     private val listener by lazyUnsafe {
         object : OnNavigationViewClickListener {
@@ -68,6 +76,11 @@ class BookmarkFragment : Fragment(), OnBackPressedListener {
         toggle.syncState()
         navigationView.setCheckedItem(R.id.nav_bookmark)
         navigationView.setOnNavigationViewClickListener(listener)
+
+        listView.adapter = listAdapter
+        Dependency.repository.getBookmarkMovieList().let {
+            listAdapter.submitList(it)
+        }
     }
 
     override fun onBackPressed(): Boolean {

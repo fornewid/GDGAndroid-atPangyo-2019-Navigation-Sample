@@ -25,11 +25,10 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <ImageView
-            android:id="@+id/profileImageView"
+            android:id="@+id/posterView"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:src="@mipmap/ic_launcher"
-            android:transitionName="profile"
+            android:transitionName="poster"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

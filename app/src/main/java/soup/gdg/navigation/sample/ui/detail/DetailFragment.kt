@@ -2,15 +2,18 @@ package soup.gdg.navigation.sample.ui.detail
 
 import android.os.Bundle
 import android.transition.TransitionInflater
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import kotlinx.android.synthetic.main.fragment_detail.*
+import soup.gdg.navigation.sample.Dependency
 import soup.gdg.navigation.sample.R
 import soup.gdg.navigation.sample.data.model.Movie
 import soup.gdg.navigation.sample.data.model.MovieId
+import soup.gdg.navigation.sample.util.loadImageAsync
 
 class DetailFragment : Fragment() {
 
@@ -35,13 +38,13 @@ class DetailFragment : Fragment() {
         toolbar.setTitle(R.string.title_detail)
         fab.setOnClickListener { v ->
         }
-        loadContents(args.movieId)
-    }
-
-    private fun loadContents(id: MovieId) {
+        Dependency.repository.getMovieDetail(args.movieId).run {
+            Log.d("SOUP", "AA $this")
+            renderContents(this)
+        }
     }
 
     private fun renderContents(movie: Movie) {
-
+        posterView.loadImageAsync(movie.posterUrl)
     }
 }

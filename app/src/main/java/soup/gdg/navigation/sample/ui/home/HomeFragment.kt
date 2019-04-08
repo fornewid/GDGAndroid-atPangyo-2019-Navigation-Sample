@@ -9,8 +9,10 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home_content.*
+import soup.gdg.navigation.sample.Dependency
+import soup.gdg.navigation.sample.NavigationDirections
 import soup.gdg.navigation.sample.R
 import soup.gdg.navigation.sample.ui.OnBackPressedListener
 import soup.gdg.navigation.sample.ui.OnNavigationViewClickListener
@@ -18,6 +20,12 @@ import soup.gdg.navigation.sample.ui.setOnNavigationViewClickListener
 import soup.gdg.navigation.sample.util.lazyUnsafe
 
 class HomeFragment : Fragment(), OnBackPressedListener {
+
+    private val listAdapter = MovieListAdapter { movie ->
+        findNavController().navigate(
+            NavigationDirections.actionToDetail(movie.id)
+        )
+    }
 
     private val listener by lazyUnsafe {
         object : OnNavigationViewClickListener {
@@ -81,6 +89,11 @@ class HomeFragment : Fragment(), OnBackPressedListener {
         toggle.syncState()
         navigationView.setCheckedItem(R.id.nav_home)
         navigationView.setOnNavigationViewClickListener(listener)
+
+        listView.adapter = listAdapter
+        Dependency.repository.getMovieList().let {
+            listAdapter.submitList(it)
+        }
     }
 
     override fun onBackPressed(): Boolean {

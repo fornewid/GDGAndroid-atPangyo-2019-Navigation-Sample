@@ -55,7 +55,7 @@
 
     <fragment
         android:id="@+id/bookmark"
-        android:name="soup.gdg.navigation.sample.ui.bookmark.BookmarkFragment"
+        android:name="soup.gdg.navigation.sample.ui.home.BookmarkFragment"
         tools:layout="@layout/fragment_home" />
 
     <fragment
