@@ -95,13 +95,13 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="profile">
+                  <entry key="nested_navigation">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="236" />
-                            <option name="y" value="192" />
+                            <option name="x" value="6" />
+                            <option name="y" value="-77" />
                           </Point>
                         </option>
                       </LayoutPositions>
