@@ -70,11 +70,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/profile"
-        android:name="soup.gdg.navigation.sample.ui.profile.ProfileFragment"
-        tools:layout="@layout/fragment_profile" />
-
-    <fragment
         android:id="@+id/settings"
         android:name="soup.gdg.navigation.sample.ui.settings.SettingsFragment"
         tools:layout="@layout/fragment_settings" />
@@ -95,6 +90,8 @@
             app:argType="string"
             app:nullable="false" />
     </activity>
+
+    <include app:graph="@navigation/nested_navigation" />
 
     <!-- Global Actions -->
 
@@ -120,7 +117,7 @@
 
     <action
         android:id="@+id/action_to_profile"
-        app:destination="@id/profile"
+        app:destination="@id/nested_navigation"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left"
         app:popEnterAnim="@anim/slide_in_left"
