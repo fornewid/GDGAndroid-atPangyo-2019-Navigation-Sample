@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home_content.*
 import soup.gdg.navigation.sample.Dependency
-import soup.gdg.navigation.sample.NavigationDirections
 import soup.gdg.navigation.sample.R
 import soup.gdg.navigation.sample.ui.OnBackPressedListener
 import soup.gdg.navigation.sample.ui.OnNavigationViewClickListener
@@ -24,7 +23,7 @@ class HomeFragment : Fragment(), OnBackPressedListener {
 
     private val listAdapter = MovieListAdapter { movie ->
         findNavController().navigate(
-            NavigationDirections.actionToDetail(movie.id)
+            HomeFragmentDirections.actionToDetail(movie.id)
         )
     }
 

@@ -23,7 +23,7 @@ class BookmarkFragment : Fragment(), OnBackPressedListener {
 
     private val listAdapter = MovieListAdapter { movie ->
         findNavController().navigate(
-            NavigationDirections.actionToDetail(movie.id)
+            BookmarkFragmentDirections.actionToDetail(movie.id)
         )
     }
 

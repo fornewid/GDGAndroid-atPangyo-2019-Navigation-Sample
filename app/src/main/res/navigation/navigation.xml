@@ -67,6 +67,8 @@
             android:name="movieId"
             app:argType="string"
             app:nullable="false" />
+
+        <deepLink app:uri="origin://detail/{movieId}" />
     </fragment>
 
     <fragment

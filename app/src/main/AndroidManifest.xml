@@ -16,11 +16,25 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".ui.MainActivity"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <nav-graph android:value="@navigation/navigation" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="detail"
+                    android:scheme="custom" />
             </intent-filter>
         </activity>
         <activity
