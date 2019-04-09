@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -80,6 +81,7 @@ class BookmarkFragment : Fragment(), OnBackPressedListener {
         listView.adapter = listAdapter
         Dependency.repository.getBookmarkMovieList().let {
             listAdapter.submitList(it)
+            emptyLabel.isVisible = it.isEmpty()
         }
     }
 
