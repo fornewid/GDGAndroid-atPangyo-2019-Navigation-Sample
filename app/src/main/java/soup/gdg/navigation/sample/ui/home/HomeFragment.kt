@@ -8,15 +8,14 @@ import android.view.ViewGroup
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
+import androidx.core.view.postDelayed
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home_content.*
 import soup.gdg.navigation.sample.Dependency
 import soup.gdg.navigation.sample.R
-import soup.gdg.navigation.sample.ui.OnBackPressedListener
-import soup.gdg.navigation.sample.ui.OnNavigationViewClickListener
-import soup.gdg.navigation.sample.ui.setOnNavigationViewClickListener
+import soup.gdg.navigation.sample.ui.*
 import soup.gdg.navigation.sample.util.lazyUnsafe
 
 class HomeFragment : Fragment(), OnBackPressedListener {
@@ -91,9 +90,13 @@ class HomeFragment : Fragment(), OnBackPressedListener {
         navigationView.setOnNavigationViewClickListener(listener)
 
         listView.adapter = listAdapter
-        Dependency.repository.getMovieList().let {
-            listAdapter.submitList(it)
-            emptyLabel.isVisible = it.isEmpty()
+        showLoading()
+        view.postDelayed(500) {
+            Dependency.repository.getMovieList().let {
+                listAdapter.submitList(it)
+                emptyLabel.isVisible = it.isEmpty()
+            }
+            hideLoading()
         }
     }
 

@@ -3,12 +3,21 @@ package soup.gdg.navigation.sample.ui
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.activity_main.*
 import soup.gdg.navigation.sample.NavigationDirections
 import soup.gdg.navigation.sample.R
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), LoadingViewOwner {
+
+    override fun showLoadingView() {
+        loadingView?.isVisible = true
+    }
+
+    override fun hideLoadingView() {
+        loadingView?.isVisible = false
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
