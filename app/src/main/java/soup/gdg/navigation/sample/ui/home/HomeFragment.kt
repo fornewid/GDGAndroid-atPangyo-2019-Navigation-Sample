@@ -1,5 +1,7 @@
 package soup.gdg.navigation.sample.ui.home
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
@@ -14,8 +16,10 @@ import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home_content.*
 import soup.gdg.navigation.sample.Dependency
+import soup.gdg.navigation.sample.NavigationDirections
 import soup.gdg.navigation.sample.R
 import soup.gdg.navigation.sample.ui.*
+import soup.gdg.navigation.sample.ui.login.LoginConfirmDialogFragment
 import soup.gdg.navigation.sample.util.lazyUnsafe
 
 class HomeFragment : Fragment(), OnBackPressedListener {
@@ -31,9 +35,13 @@ class HomeFragment : Fragment(), OnBackPressedListener {
 
             override fun onHeaderClicked(index: Int) {
                 drawerLayout.closeDrawer(GravityCompat.START)
-                findNavController().navigate(
-                    HomeFragmentDirections.actionToProfile()
-                )
+                if (Dependency.repository.isSignedIn()) {
+                    findNavController().navigate(
+                        HomeFragmentDirections.actionToProfile()
+                    )
+                } else {
+                    LoginConfirmDialogFragment.show(this@HomeFragment, REQUEST_LOGIN_CONFIRM)
+                }
             }
 
             override fun onItemClicked(itemId: Int) {
@@ -100,11 +108,24 @@ class HomeFragment : Fragment(), OnBackPressedListener {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_LOGIN_CONFIRM && resultCode == RESULT_OK) {
+            findNavController().navigate(
+                NavigationDirections.actionToLogin(nextDestinationIsUp = true)
+            )
+        }
+    }
+
     override fun onBackPressed(): Boolean {
         if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
             return true
         }
         return false
+    }
+
+    companion object {
+        private const val REQUEST_LOGIN_CONFIRM = 1
     }
 }
