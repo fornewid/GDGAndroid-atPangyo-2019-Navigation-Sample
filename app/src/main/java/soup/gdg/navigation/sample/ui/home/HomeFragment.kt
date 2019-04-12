@@ -45,9 +45,9 @@ class HomeFragment : Fragment(), OnBackPressedListener {
                     R.id.nav_settings -> findNavController().navigate(
                         HomeFragmentDirections.actionToSettings()
                     )
-                    R.id.nav_send -> findNavController().navigate(
+                    R.id.nav_github -> findNavController().navigate(
                         HomeFragmentDirections.actionToWeb(
-                            title = "Source Code",
+                            title = "Github",
                             url = "https://github.com/fornewid/GDGAndroid-atPangyo-2019-Navigation-Sample"
                         )
                     )

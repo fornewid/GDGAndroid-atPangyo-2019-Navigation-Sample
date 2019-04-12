@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home_content.*
 import soup.gdg.navigation.sample.Dependency
-import soup.gdg.navigation.sample.NavigationDirections
 import soup.gdg.navigation.sample.R
 import soup.gdg.navigation.sample.ui.OnBackPressedListener
 import soup.gdg.navigation.sample.ui.OnNavigationViewClickListener
@@ -44,9 +43,9 @@ class BookmarkFragment : Fragment(), OnBackPressedListener {
                     R.id.nav_settings -> findNavController().navigate(
                         BookmarkFragmentDirections.actionToSettings()
                     )
-                    R.id.nav_send -> findNavController().navigate(
+                    R.id.nav_github -> findNavController().navigate(
                         BookmarkFragmentDirections.actionToWeb(
-                            title = "Source Code",
+                            title = "Github",
                             url = "https://github.com/fornewid/GDGAndroid-atPangyo-2019-Navigation-Sample"
                         )
                     )

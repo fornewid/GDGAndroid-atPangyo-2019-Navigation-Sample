@@ -56,11 +56,11 @@ class DetailFragment : Fragment() {
 
     private fun notifyDeepLinkNotification(context: Context, deepLink: String) {
         NotificationChannels.notify(context) {
-            setSmallIcon(R.drawable.ic_menu_camera)
-                .setContentTitle("DeepLink Test")
-                .setContentText("Please click to execute deepLink.")
-                .setAutoCancel(true)
-                .setContentIntent(context.createDeepLinkIntent(deepLink))
+            setSmallIcon(R.drawable.ic_notification)
+            setContentTitle("DeepLink Test")
+            setContentText("Please click to execute deepLink.")
+            setAutoCancel(true)
+            setContentIntent(context.createDeepLinkIntent(deepLink))
         }
     }
 
