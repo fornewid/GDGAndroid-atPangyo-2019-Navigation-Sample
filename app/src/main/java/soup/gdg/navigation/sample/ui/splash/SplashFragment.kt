@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.postOnAnimationDelayed
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import soup.gdg.navigation.sample.Dependency
 import soup.gdg.navigation.sample.R
 import soup.gdg.navigation.sample.ui.splash.SplashFragmentDirections.Companion.actionToHome
 import soup.gdg.navigation.sample.ui.splash.SplashFragmentDirections.Companion.actionToLogin
@@ -24,8 +25,7 @@ class SplashFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         view?.postOnAnimationDelayed(500) {
-            //TODO:
-            val isSignedIn = false
+            val isSignedIn = Dependency.repository.isSignedIn()
             if (isSignedIn) {
                 findNavController().navigate(actionToHome())
             } else {

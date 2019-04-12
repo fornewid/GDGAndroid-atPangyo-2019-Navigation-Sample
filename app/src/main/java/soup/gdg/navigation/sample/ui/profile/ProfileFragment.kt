@@ -5,7 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import kotlinx.android.synthetic.main.fragment_profile.*
+import soup.gdg.navigation.sample.Dependency
+import soup.gdg.navigation.sample.NavigationDirections
 import soup.gdg.navigation.sample.R
 
 class ProfileFragment : Fragment() {
@@ -21,5 +25,16 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         toolbar.setTitle(R.string.nav_header_title)
+        logoutButton.setOnClickListener {
+            Dependency.repository.signOut()
+            findNavController().navigate(
+                NavigationDirections.actionToLogin(),
+                navOptions {
+                    popUpTo(R.id.home) {
+                        inclusive = true
+                    }
+                }
+            )
+        }
     }
 }

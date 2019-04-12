@@ -8,11 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import kotlinx.android.synthetic.main.fragment_login.*
+import soup.gdg.navigation.sample.Dependency
 import soup.gdg.navigation.sample.R
 import soup.gdg.navigation.sample.ui.ExternalLoginActivity
+import soup.gdg.navigation.sample.ui.login.LoginFragmentArgs
 
 class LoginFragment : Fragment() {
+
+    private val args: LoginFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,11 +31,10 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         toolbar.setTitle(R.string.title_login)
         skipButton.setOnClickListener {
-            findNavController().navigate(
-                LoginFragmentDirections.actionToHome()
-            )
+            navigateToNextDestination()
         }
         loginButton.setOnClickListener {
+            Dependency.repository.signIn()
             startActivityForResult(
                 Intent(view.context, ExternalLoginActivity::class.java),
                 REQUEST_LOGIN
@@ -41,6 +45,14 @@ class LoginFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_LOGIN && resultCode == RESULT_OK) {
+            navigateToNextDestination()
+        }
+    }
+
+    private fun navigateToNextDestination() {
+        if (args.nextDestinationIsUp) {
+            findNavController().navigateUp()
+        } else {
             findNavController().navigate(
                 LoginFragmentDirections.actionToHome()
             )

@@ -45,6 +45,11 @@
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/login"
             app:popUpToInclusive="true" />
+
+        <argument
+            android:name="nextDestinationIsUp"
+            android:defaultValue="false"
+            app:argType="boolean" />
     </fragment>
 
     <fragment
@@ -96,6 +101,14 @@
     <include app:graph="@navigation/nested_navigation" />
 
     <!-- Global Actions -->
+
+    <action
+        android:id="@+id/action_to_login"
+        app:destination="@id/login"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left" />
 
     <action
         android:id="@+id/action_to_home"

@@ -7,6 +7,16 @@ import soup.gdg.navigation.sample.data.store.MovieDataStore
 
 interface SampleRepository {
 
+    /* Fake Authentication */
+
+    fun signIn()
+
+    fun signOut()
+
+    fun isSignedIn(): Boolean
+
+    /* Fake APIs */
+
     fun getMovieList(): List<Movie>
 
     fun getMovieDetail(movieId: MovieId): Movie
@@ -22,6 +32,20 @@ class SampleRepositoryImpl(
     private val movieStore: MovieDataStore,
     private val bookmarkStore: BookmarkDataStore
 ) : SampleRepository {
+
+    private var isSignedIn = false
+
+    override fun signIn() {
+        isSignedIn = true
+    }
+
+    override fun signOut() {
+        isSignedIn = false
+    }
+
+    override fun isSignedIn(): Boolean {
+        return isSignedIn
+    }
 
     override fun getMovieList(): List<Movie> {
         return movieStore.getList().map {

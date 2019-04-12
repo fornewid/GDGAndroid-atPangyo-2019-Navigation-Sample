@@ -1,5 +1,6 @@
 package soup.gdg.navigation.sample.ui.detail
 
+import android.app.Activity.RESULT_OK
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
@@ -10,12 +11,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import kotlinx.android.synthetic.main.fragment_detail.*
 import soup.gdg.navigation.sample.Dependency
+import soup.gdg.navigation.sample.NavigationDirections
 import soup.gdg.navigation.sample.NotificationChannels
 import soup.gdg.navigation.sample.R
 import soup.gdg.navigation.sample.data.model.Movie
+import soup.gdg.navigation.sample.ui.login.LoginConfirmDialogFragment
 import soup.gdg.navigation.sample.util.loadImageAsync
 
 class DetailFragment : Fragment() {
@@ -52,7 +56,20 @@ class DetailFragment : Fragment() {
         updateContent()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_LOGIN_CONFIRM && resultCode == RESULT_OK) {
+            findNavController().navigate(
+                NavigationDirections.actionToLogin(nextDestinationIsUp = true)
+            )
+        }
+    }
+
     private fun toggleFavoriteState() {
+        if (Dependency.repository.isSignedIn().not()) {
+            LoginConfirmDialogFragment.show(this, REQUEST_LOGIN_CONFIRM)
+            return
+        }
         val movie = movie ?: return
         if (movie.favorite) {
             Dependency.repository.removeBookmark(movie)
@@ -91,5 +108,9 @@ class DetailFragment : Fragment() {
     private fun Context.createDeepLinkIntent(deepLink: String): PendingIntent {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(deepLink))
         return PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
+    }
+
+    companion object {
+        private const val REQUEST_LOGIN_CONFIRM = 1
     }
 }
