@@ -24,16 +24,21 @@ class SampleRepositoryImpl(
 ) : SampleRepository {
 
     override fun getMovieList(): List<Movie> {
-        return movieStore.getList()
+        return movieStore.getList().map {
+            it.copy(favorite = it.isFavorite())
+        }
     }
 
     override fun getMovieDetail(movieId: MovieId): Movie {
-        return movieStore.getDetail(movieId)
+        return movieStore.getDetail(movieId).let {
+            it.copy(favorite = it.isFavorite())
+        }
     }
 
     override fun getBookmarkMovieList(): List<Movie> {
         return movieStore.getList()
-            .filter { bookmarkStore.isBookmark(it.id) }
+            .filter { it.isFavorite() }
+            .map { it.copy(favorite = true) }
     }
 
     override fun addBookmark(movie: Movie) {
@@ -42,5 +47,9 @@ class SampleRepositoryImpl(
 
     override fun removeBookmark(movie: Movie) {
         bookmarkStore.removeBookmark(movie.id)
+    }
+
+    private fun Movie.isFavorite(): Boolean {
+        return bookmarkStore.isBookmark(id)
     }
 }

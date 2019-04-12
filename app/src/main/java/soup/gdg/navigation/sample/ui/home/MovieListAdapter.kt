@@ -32,8 +32,16 @@ class MovieListAdapter(
 class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val posterView: ImageView = view.findViewById(R.id.posterView)
+    private val favoriteIcon: ImageView = view.findViewById(R.id.favoriteIcon)
 
     fun bind(movie: Movie) {
         posterView.loadImageAsync(movie.posterUrl)
+        favoriteIcon.setImageResource(
+            if (movie.favorite) {
+                R.drawable.ic_favorite_on
+            } else {
+                R.drawable.ic_favorite_off
+            }
+        )
     }
 }

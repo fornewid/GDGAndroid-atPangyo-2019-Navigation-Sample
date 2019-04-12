@@ -21,6 +21,7 @@ import soup.gdg.navigation.sample.util.loadImageAsync
 class DetailFragment : Fragment() {
 
     private val args: DetailFragmentArgs by navArgs()
+    private var movie: Movie? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,13 +46,36 @@ class DetailFragment : Fragment() {
         customFab.setOnClickListener {
             notifyDeepLinkNotification(view.context, "custom://detail?id=${args.movieId}")
         }
-        Dependency.repository.getMovieDetail(args.movieId).run {
-            renderContents(this)
+        favoriteFab.setOnClickListener {
+            toggleFavoriteState()
+        }
+        updateContent()
+    }
+
+    private fun toggleFavoriteState() {
+        val movie = movie ?: return
+        if (movie.favorite) {
+            Dependency.repository.removeBookmark(movie)
+        } else {
+            Dependency.repository.addBookmark(movie)
+        }
+        updateContent()
+    }
+
+    private fun updateContent() {
+        Dependency.repository.getMovieDetail(args.movieId).let {
+            movie = it
+            renderContents(it)
         }
     }
 
     private fun renderContents(movie: Movie) {
         posterView.loadImageAsync(movie.posterUrl)
+        if (movie.favorite) {
+            favoriteFab.setImageResource(R.drawable.ic_favorite_on)
+        } else {
+            favoriteFab.setImageResource(R.drawable.ic_favorite_off)
+        }
     }
 
     private fun notifyDeepLinkNotification(context: Context, deepLink: String) {
