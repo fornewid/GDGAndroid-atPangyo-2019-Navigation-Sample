@@ -3,7 +3,6 @@ package soup.gdg.navigation.sample.ui.home
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
-import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,17 +65,6 @@ class HomeFragment : Fragment(), OnBackPressedListener {
         } else {
             LoginConfirmDialogFragment.show(this@HomeFragment, REQUEST_LOGIN_CONFIRM)
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-        prepareTransitions()
-    }
-
-    private fun prepareTransitions() {
-        exitTransition = TransitionInflater.from(context)
-            .inflateTransition(R.transition.transition_grid_exit)
     }
 
     override fun onCreateView(

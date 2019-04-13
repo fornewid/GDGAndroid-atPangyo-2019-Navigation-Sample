@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,12 +25,6 @@ class DetailFragment : Fragment() {
 
     private val args: DetailFragmentArgs by navArgs()
     private var movie: Movie? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        sharedElementEnterTransition = TransitionInflater.from(context)
-            .inflateTransition(R.transition.transition_detail_enter)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
