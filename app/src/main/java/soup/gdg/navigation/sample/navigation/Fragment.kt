@@ -13,8 +13,8 @@ import androidx.navigation.fragment.findNavController
  *
  * @see NavController
  */
-fun Fragment.findNestedNavController(): NavController? =
-    childFragmentManager.primaryNavigationFragment?.findNavController()
+fun Fragment.findNestedNavController(): NavController =
+    childFragmentManager.fragments[0].findNavController()
 
 /**
  * Activity

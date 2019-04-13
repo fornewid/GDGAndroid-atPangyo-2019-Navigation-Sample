@@ -7,7 +7,6 @@ import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -16,6 +15,7 @@ import soup.gdg.navigation.sample.Dependency
 import soup.gdg.navigation.sample.HomeNavGraphDirections
 import soup.gdg.navigation.sample.NavigationDirections
 import soup.gdg.navigation.sample.R
+import soup.gdg.navigation.sample.navigation.ExtendedNavigationUI
 import soup.gdg.navigation.sample.navigation.findNestedNavController
 import soup.gdg.navigation.sample.ui.OnBackPressedListener
 import soup.gdg.navigation.sample.ui.OnNavigationViewClickListener
@@ -40,9 +40,9 @@ class HomeFragment : Fragment(), OnBackPressedListener {
             override fun onItemClicked(itemId: Int) {
                 drawerLayout.closeDrawer(GravityCompat.START)
                 when (itemId) {
-                    R.id.nav_home -> findNestedNavController()?.navigateUp()
+                    R.id.nav_home -> findNestedNavController().popBackStack(R.id.main, false)
                     R.id.nav_bookmark -> doAfterSignIn {
-                        findNestedNavController()?.navigate(
+                        findNestedNavController().navigate(
                             HomeNavGraphDirections.actionToBookmark()
                         )
                     }
@@ -89,16 +89,9 @@ class HomeFragment : Fragment(), OnBackPressedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        toolbar.setTitle(R.string.title_home)
-
-        val toggle = ActionBarDrawerToggle(
-            activity, drawerLayout, toolbar,
-            R.string.navigation_drawer_open,
-            R.string.navigation_drawer_close
-        )
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
-        navigationView.setCheckedItem(R.id.nav_home)
+        ExtendedNavigationUI.setupWithNavController(
+            toolbar, findNestedNavController(), drawerLayout,
+            R.id.main, R.id.bookmark)
         navigationView.setOnNavigationViewClickListener(listener)
     }
 
