@@ -81,7 +81,7 @@ class HomeFragment : Fragment(), OnBackPressedListener {
         super.onViewCreated(view, savedInstanceState)
         ExtendedNavigationUI.setupWithNavController(
             toolbar, findNestedNavController(), drawerLayout,
-            R.id.main, R.id.bookmark
+            topLevelDestinationIds = setOf(R.id.main, R.id.bookmark)
         )
         navigationView.setOnNavigationViewClickListener(listener)
     }

@@ -12,11 +12,11 @@ object ExtendedNavigationUI {
         toolbar: Toolbar,
         navController: NavController,
         drawerLayout: DrawerLayout?,
-        vararg topLevelDestinationIds: Int
+        topLevelDestinationIds: Set<Int>
     ) {
         NavigationUI.setupWithNavController(
             toolbar, navController,
-            AppBarConfiguration.Builder(topLevelDestinationIds.toSet())
+            AppBarConfiguration.Builder(topLevelDestinationIds)
                 .setDrawerLayout(drawerLayout)
                 .build()
         )
