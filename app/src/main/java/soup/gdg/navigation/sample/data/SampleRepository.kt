@@ -48,14 +48,22 @@ class SampleRepositoryImpl(
     }
 
     override fun getMovieList(): List<Movie> {
-        return movieStore.getList().map {
-            it.copy(favorite = it.isFavorite())
+        return if (isSignedIn) {
+            movieStore.getList().map {
+                it.copy(favorite = it.isFavorite())
+            }
+        } else {
+            movieStore.getList()
         }
     }
 
     override fun getMovieDetail(movieId: MovieId): Movie {
-        return movieStore.getDetail(movieId).let {
-            it.copy(favorite = it.isFavorite())
+        return if (isSignedIn) {
+            movieStore.getDetail(movieId).let {
+                it.copy(favorite = it.isFavorite())
+            }
+        } else {
+            movieStore.getDetail(movieId)
         }
     }
 

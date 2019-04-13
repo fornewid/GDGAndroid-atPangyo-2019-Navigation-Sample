@@ -30,12 +30,10 @@ class HomeFragment : Fragment(), OnBackPressedListener {
 
             override fun onHeaderClicked(index: Int) {
                 drawerLayout.closeDrawer(GravityCompat.START)
-                if (Dependency.repository.isSignedIn()) {
+                doAfterSignIn {
                     findNavController().navigate(
                         HomeFragmentDirections.actionToProfile()
                     )
-                } else {
-                    LoginConfirmDialogFragment.show(this@HomeFragment, REQUEST_LOGIN_CONFIRM)
                 }
             }
 
@@ -43,9 +41,11 @@ class HomeFragment : Fragment(), OnBackPressedListener {
                 drawerLayout.closeDrawer(GravityCompat.START)
                 when (itemId) {
                     R.id.nav_home -> findNestedNavController()?.navigateUp()
-                    R.id.nav_bookmark -> findNestedNavController()?.navigate(
-                        HomeNavGraphDirections.actionToBookmark()
-                    )
+                    R.id.nav_bookmark -> doAfterSignIn {
+                        findNestedNavController()?.navigate(
+                            HomeNavGraphDirections.actionToBookmark()
+                        )
+                    }
                     R.id.nav_settings -> findNavController().navigate(
                         HomeFragmentDirections.actionToSettings()
                     )
@@ -57,6 +57,14 @@ class HomeFragment : Fragment(), OnBackPressedListener {
                     )
                 }
             }
+        }
+    }
+
+    private fun doAfterSignIn(action: () -> Unit) {
+        if (Dependency.repository.isSignedIn()) {
+            action()
+        } else {
+            LoginConfirmDialogFragment.show(this@HomeFragment, REQUEST_LOGIN_CONFIRM)
         }
     }
 
