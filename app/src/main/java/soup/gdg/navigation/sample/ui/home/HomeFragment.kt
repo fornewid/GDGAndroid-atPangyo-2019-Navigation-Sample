@@ -10,6 +10,7 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home_profile.view.*
 import soup.gdg.navigation.sample.Dependency
 import soup.gdg.navigation.sample.HomeNavGraphDirections
 import soup.gdg.navigation.sample.NavigationDirections
@@ -20,6 +21,7 @@ import soup.gdg.navigation.sample.ui.OnBackPressedListener
 import soup.gdg.navigation.sample.ui.OnNavigationViewClickListener
 import soup.gdg.navigation.sample.ui.login.LoginConfirmDialogFragment
 import soup.gdg.navigation.sample.ui.setOnNavigationViewClickListener
+import soup.gdg.navigation.sample.util.clipToOval
 import soup.gdg.navigation.sample.util.lazyUnsafe
 
 class HomeFragment : Fragment(), OnBackPressedListener {
@@ -79,8 +81,27 @@ class HomeFragment : Fragment(), OnBackPressedListener {
         super.onViewCreated(view, savedInstanceState)
         ExtendedNavigationUI.setupWithNavController(
             toolbar, findNestedNavController(), drawerLayout,
-            R.id.main, R.id.bookmark)
+            R.id.main, R.id.bookmark
+        )
         navigationView.setOnNavigationViewClickListener(listener)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        refreshProfile()
+    }
+
+    private fun refreshProfile() {
+        navigationView.getHeaderView(0)?.run {
+            profileImage.clipToOval = true
+            if (Dependency.repository.isSignedIn()) {
+                profileImage.setImageResource(R.drawable.profile_user)
+                nicknameText.text = "SOUP"
+            } else {
+                profileImage.setImageResource(R.drawable.profile_guest)
+                nicknameText.text = "로그인이 필요합니다"
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

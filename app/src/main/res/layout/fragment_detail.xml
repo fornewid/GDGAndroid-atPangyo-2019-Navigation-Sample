@@ -29,7 +29,6 @@
             android:layout_width="180dp"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
-            android:transitionName="poster"
             app:layout_constraintBottom_toTopOf="@+id/fabBarrier"
             app:layout_constraintDimensionRatio="V,7:10"
             app:layout_constraintEnd_toEndOf="parent"

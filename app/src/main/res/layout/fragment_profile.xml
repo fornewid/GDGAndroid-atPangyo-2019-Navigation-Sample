@@ -26,15 +26,14 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <ImageView
-            android:id="@+id/profileImageView"
+            android:id="@+id/profileImage"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:transitionName="profile"
+            android:src="@drawable/profile_user"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@mipmap/ic_launcher_round" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/logoutButton"
@@ -48,7 +47,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
+            app:layout_constraintTop_toBottomOf="@+id/profileImage" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

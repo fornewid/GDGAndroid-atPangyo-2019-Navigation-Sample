@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 import soup.gdg.navigation.sample.Dependency
 import soup.gdg.navigation.sample.NavigationDirections
 import soup.gdg.navigation.sample.R
+import soup.gdg.navigation.sample.util.clipToOval
 
 class ProfileFragment : Fragment() {
 
@@ -24,7 +25,8 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        toolbar.setTitle(R.string.nav_header_title)
+        toolbar.title = "SOUP"
+        profileImage.clipToOval = true
         logoutButton.setOnClickListener {
             Dependency.repository.signOut()
             findNavController().navigate(
