@@ -22,24 +22,19 @@ class MainActivity : AppCompatActivity(), LoadingViewOwner {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        intent?.handleDeepLink()
+        intent?.handleDeepLinkInCustom()
     }
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        intent?.handleDeepLink()
+        intent?.handleDeepLinkInCustom()
     }
 
-    private fun Intent.handleDeepLink() {
+    private fun Intent.handleDeepLinkInCustom() {
         if (scheme != "custom" || data?.host != "detail") return
         val id = data?.getQueryParameter("id") ?: return
         navHostFragment.findNavController().apply {
-            if (currentDestination == null) {
-                navigate(NavigationDirections.actionToDetail(id))
-            } else {
-                popBackStack(R.id.home, false)
-                navigate(NavigationDirections.actionToDetail(id))
-            }
+            navigate(NavigationDirections.actionToDetail(id))
         }
     }
 
