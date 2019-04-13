@@ -1,6 +1,5 @@
 package soup.gdg.navigation.sample.ui.settings
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,12 +34,6 @@ class SettingsFragment : Fragment() {
                 AppCompatDelegate.MODE_NIGHT_NO
             }
         )
-        activity?.recreateWithAnimation()
-    }
-
-    private fun Activity.recreateWithAnimation() {
-        finish()
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-        startActivity(intent)
+        activity?.recreate()
     }
 }
