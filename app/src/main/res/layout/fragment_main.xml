@@ -3,27 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.MainActivity">
+    android:layout_height="match_parent">
 
-    <fragment
-        android:id="@+id/navHostFragment"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:defaultNavHost="true"
+        android:clipToPadding="false"
+        android:padding="8dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/nav_graph" />
+        app:spanCount="3"
+        tools:listitem="@layout/item_movie" />
 
-    <ProgressBar
-        android:id="@+id/loadingView"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:indeterminateOnly="true"
+    <TextView
+        android:id="@+id/emptyLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="컨텐츠가 없습니다."
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

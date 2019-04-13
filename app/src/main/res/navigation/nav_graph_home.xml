@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_nav_graph"
+    app:startDestination="@+id/main">
+
+    <fragment
+        android:id="@+id/main"
+        android:name="soup.gdg.navigation.sample.ui.home.MainFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_main" />
+
+    <fragment
+        android:id="@+id/bookmark"
+        android:name="soup.gdg.navigation.sample.ui.home.BookmarkFragment"
+        android:label="@string/title_bookmark"
+        tools:layout="@layout/fragment_bookmark" />
+
+    <action
+        android:id="@+id/action_to_bookmark"
+        app:destination="@id/bookmark" />
+
+</navigation>

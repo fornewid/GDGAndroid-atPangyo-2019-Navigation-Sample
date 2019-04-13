@@ -9,26 +9,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
-import androidx.core.view.isVisible
-import androidx.core.view.postDelayed
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home_content.*
 import soup.gdg.navigation.sample.Dependency
+import soup.gdg.navigation.sample.HomeNavGraphDirections
 import soup.gdg.navigation.sample.NavigationDirections
 import soup.gdg.navigation.sample.R
-import soup.gdg.navigation.sample.ui.*
+import soup.gdg.navigation.sample.navigation.findNestedNavController
+import soup.gdg.navigation.sample.ui.OnBackPressedListener
+import soup.gdg.navigation.sample.ui.OnNavigationViewClickListener
 import soup.gdg.navigation.sample.ui.login.LoginConfirmDialogFragment
+import soup.gdg.navigation.sample.ui.setOnNavigationViewClickListener
 import soup.gdg.navigation.sample.util.lazyUnsafe
 
 class HomeFragment : Fragment(), OnBackPressedListener {
-
-    private val listAdapter = MovieListAdapter { movie ->
-        findNavController().navigate(
-            HomeFragmentDirections.actionToDetail(movie.id)
-        )
-    }
 
     private val listener by lazyUnsafe {
         object : OnNavigationViewClickListener {
@@ -47,8 +42,9 @@ class HomeFragment : Fragment(), OnBackPressedListener {
             override fun onItemClicked(itemId: Int) {
                 drawerLayout.closeDrawer(GravityCompat.START)
                 when (itemId) {
-                    R.id.nav_bookmark -> findNavController().navigate(
-                        HomeFragmentDirections.actionToBookmark()
+                    R.id.nav_home -> findNestedNavController()?.navigateUp()
+                    R.id.nav_bookmark -> findNestedNavController()?.navigate(
+                        HomeNavGraphDirections.actionToBookmark()
                     )
                     R.id.nav_settings -> findNavController().navigate(
                         HomeFragmentDirections.actionToSettings()
@@ -96,16 +92,6 @@ class HomeFragment : Fragment(), OnBackPressedListener {
         toggle.syncState()
         navigationView.setCheckedItem(R.id.nav_home)
         navigationView.setOnNavigationViewClickListener(listener)
-
-        listView.adapter = listAdapter
-        showLoading()
-        view.postDelayed(500) {
-            Dependency.repository.getMovieList().let {
-                listAdapter.submitList(it)
-                emptyLabel.isVisible = it.isEmpty()
-            }
-            hideLoading()
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -115,6 +101,7 @@ class HomeFragment : Fragment(), OnBackPressedListener {
                 NavigationDirections.actionToLogin(nextDestinationIsUp = true)
             )
         }
+        //TODO: Where is the login result?
     }
 
     override fun onBackPressed(): Boolean {

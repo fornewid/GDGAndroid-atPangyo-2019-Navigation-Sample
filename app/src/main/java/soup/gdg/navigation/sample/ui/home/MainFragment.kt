@@ -5,13 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.core.view.postDelayed
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_bookmark.*
+import kotlinx.android.synthetic.main.fragment_main.*
 import soup.gdg.navigation.sample.Dependency
 import soup.gdg.navigation.sample.R
 import soup.gdg.navigation.sample.navigation.findParentNavController
+import soup.gdg.navigation.sample.ui.hideLoading
+import soup.gdg.navigation.sample.ui.showLoading
 
-class BookmarkFragment : Fragment() {
+class MainFragment : Fragment() {
 
     private val listAdapter = MovieListAdapter { movie ->
         findParentNavController()?.navigate(
@@ -24,15 +27,19 @@ class BookmarkFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_bookmark, container, false)
+        return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         listView.adapter = listAdapter
-        Dependency.repository.getBookmarkMovieList().let {
-            listAdapter.submitList(it)
-            emptyLabel.isVisible = it.isEmpty()
+        showLoading()
+        view.postDelayed(500) {
+            Dependency.repository.getMovieList().let {
+                listAdapter.submitList(it)
+                emptyLabel.isVisible = it.isEmpty()
+            }
+            hideLoading()
         }
     }
 }

@@ -59,11 +59,6 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/bookmark"
-        android:name="soup.gdg.navigation.sample.ui.home.BookmarkFragment"
-        tools:layout="@layout/fragment_home" />
-
-    <fragment
         android:id="@+id/detail"
         android:name="soup.gdg.navigation.sample.ui.detail.DetailFragment"
         tools:layout="@layout/fragment_detail">
@@ -98,7 +93,7 @@
             app:nullable="false" />
     </activity>
 
-    <include app:graph="@navigation/nested_navigation" />
+    <include app:graph="@navigation/nav_graph_profile" />
 
     <!-- Global Actions -->
 
@@ -117,10 +112,6 @@
         app:exitAnim="@anim/slide_out_left"
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right" />
-
-    <action
-        android:id="@+id/action_to_bookmark"
-        app:destination="@id/bookmark" />
 
     <action
         android:id="@+id/action_to_detail"
