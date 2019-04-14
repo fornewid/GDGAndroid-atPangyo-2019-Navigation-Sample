@@ -19,7 +19,7 @@ import soup.gdg.navigation.sample.navigation.ExtendedNavigationUI
 import soup.gdg.navigation.sample.navigation.findNestedNavController
 import soup.gdg.navigation.sample.ui.OnBackPressedListener
 import soup.gdg.navigation.sample.ui.OnNavigationViewClickListener
-import soup.gdg.navigation.sample.ui.login.LoginConfirmDialogFragment
+import soup.gdg.navigation.sample.ui.login.LoginConfirmDialogFragment.Companion.REQUEST_LOGIN_CONFIRM
 import soup.gdg.navigation.sample.ui.setOnNavigationViewClickListener
 import soup.gdg.navigation.sample.util.clipToOval
 import soup.gdg.navigation.sample.util.lazyUnsafe
@@ -65,7 +65,7 @@ class HomeFragment : Fragment(), OnBackPressedListener {
         if (Dependency.repository.isSignedIn()) {
             action()
         } else {
-            LoginConfirmDialogFragment.show(this@HomeFragment, REQUEST_LOGIN_CONFIRM)
+            findNavController().navigate(NavigationDirections.actionToLoginConfirm())
         }
     }
 
@@ -120,9 +120,5 @@ class HomeFragment : Fragment(), OnBackPressedListener {
             return true
         }
         return false
-    }
-
-    companion object {
-        private const val REQUEST_LOGIN_CONFIRM = 1
     }
 }

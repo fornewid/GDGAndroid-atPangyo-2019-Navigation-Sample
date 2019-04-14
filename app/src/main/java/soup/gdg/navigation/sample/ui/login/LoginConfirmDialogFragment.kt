@@ -6,7 +6,7 @@ import android.content.DialogInterface
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialogFragment
-import androidx.fragment.app.Fragment
+import soup.gdg.navigation.sample.R
 
 class LoginConfirmDialogFragment : AppCompatDialogFragment() {
 
@@ -38,10 +38,6 @@ class LoginConfirmDialogFragment : AppCompatDialogFragment() {
 
     companion object {
 
-        fun show(hostFragment: Fragment, requestCode: Int) {
-            return LoginConfirmDialogFragment()
-                .apply { setTargetFragment(hostFragment, requestCode) }
-                .show(hostFragment.requireFragmentManager(), "dialog")
-        }
+        const val REQUEST_LOGIN_CONFIRM = R.id.login_confirm
     }
 }

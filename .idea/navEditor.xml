@@ -23,6 +23,11 @@
                       <LayoutPositions />
                     </value>
                   </entry>
+                  <entry key="action_to_login_confirm">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
                   <entry key="action_to_profile">
                     <value>
                       <LayoutPositions />
@@ -79,6 +84,17 @@
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="login_confirm">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-186" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>

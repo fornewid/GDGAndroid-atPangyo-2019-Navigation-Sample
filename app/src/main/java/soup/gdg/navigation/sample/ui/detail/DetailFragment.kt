@@ -18,7 +18,7 @@ import soup.gdg.navigation.sample.NavigationDirections
 import soup.gdg.navigation.sample.NotificationChannels
 import soup.gdg.navigation.sample.R
 import soup.gdg.navigation.sample.data.model.Movie
-import soup.gdg.navigation.sample.ui.login.LoginConfirmDialogFragment
+import soup.gdg.navigation.sample.ui.login.LoginConfirmDialogFragment.Companion.REQUEST_LOGIN_CONFIRM
 import soup.gdg.navigation.sample.util.loadImageAsync
 
 class DetailFragment : Fragment() {
@@ -60,7 +60,7 @@ class DetailFragment : Fragment() {
 
     private fun toggleFavoriteState() {
         if (Dependency.repository.isSignedIn().not()) {
-            LoginConfirmDialogFragment.show(this, REQUEST_LOGIN_CONFIRM)
+            findNavController().navigate(NavigationDirections.actionToLoginConfirm())
             return
         }
         val movie = movie ?: return
@@ -101,9 +101,5 @@ class DetailFragment : Fragment() {
     private fun Context.createDeepLinkIntent(deepLink: String): PendingIntent {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(deepLink))
         return PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
-    }
-
-    companion object {
-        private const val REQUEST_LOGIN_CONFIRM = 1
     }
 }

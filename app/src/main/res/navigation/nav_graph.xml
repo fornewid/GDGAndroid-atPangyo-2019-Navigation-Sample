@@ -95,6 +95,14 @@
 
     <include app:graph="@navigation/nav_graph_profile" />
 
+    <dialog_fragment
+        android:id="@+id/login_confirm"
+        android:name="soup.gdg.navigation.sample.ui.login.LoginConfirmDialogFragment" />
+
+    <action
+        android:id="@+id/action_to_login_confirm"
+        app:destination="@id/login_confirm" />
+
     <!-- Global Actions -->
 
     <action
