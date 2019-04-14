@@ -2,7 +2,7 @@
 
 [GDG Android at Pangyo! (4월 밋업)](https://www.festa.io/events/251)의 'Navigation 살펴보기' 세션 샘플 프로젝트입니다.
 
-동작을 확인하려면 [APK 다운로드](https://github.com/fornewid/GDGAndroid-atPangyo-2019-Navigation-Sample/releases/download/sample_1.0/GDG-Navigation-Sample_1.0.apk)를 눌러 샘플 앱을 확인해주세요.
+동작을 확인하려면 [APK 다운로드](https://github.com/fornewid/GDGAndroid-atPangyo-2019-Navigation-Sample/releases/download/sample_1.1/GDG-Navigation-Sample_1.1.apk)를 눌러 샘플 앱을 확인해주세요.
 
 #### 참고사항
 
