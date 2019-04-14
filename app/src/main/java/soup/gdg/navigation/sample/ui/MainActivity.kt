@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import soup.gdg.navigation.sample.NavigationDirections
 import soup.gdg.navigation.sample.R
 import soup.gdg.navigation.sample.navigation.DialogFragmentNavigator
+import soup.gdg.navigation.sample.ui.splash.SplashFragmentDirections
 
 class MainActivity : AppCompatActivity(), LoadingViewOwner {
 
@@ -46,7 +47,12 @@ class MainActivity : AppCompatActivity(), LoadingViewOwner {
         if (scheme != "custom" || data?.host != "detail") return
         val id = data?.getQueryParameter("id") ?: return
         navHostFragment.findNavController().apply {
-            navigate(NavigationDirections.actionToDetail(id))
+            if (currentDestination?.id == R.id.splash) {
+                navigate(SplashFragmentDirections.actionToHome())
+                navigate(NavigationDirections.actionToDetail(id))
+            } else {
+                navigate(NavigationDirections.actionToDetail(id))
+            }
         }
     }
 
