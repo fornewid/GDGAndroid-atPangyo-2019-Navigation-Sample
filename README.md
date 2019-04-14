@@ -4,7 +4,7 @@
 
 ![architecture](https://github.com/fornewid/GDGAndroid-atPangyo-2019-Navigation-Sample/blob/master/screens/00_nav_graph.jpeg?raw=true)
 
-![]()
+![](https://github.com/fornewid/GDGAndroid-atPangyo-2019-Navigation-Sample/blob/master/screens/00_nav_graph_mermaid.png?raw=true)
 
 <details><summary>Source code</summary><p>
 
