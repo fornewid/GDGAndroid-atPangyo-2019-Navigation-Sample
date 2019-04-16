@@ -21,6 +21,7 @@ import soup.gdg.navigation.sample.ui.OnBackPressedListener
 import soup.gdg.navigation.sample.ui.OnNavigationViewClickListener
 import soup.gdg.navigation.sample.ui.login.LoginConfirmDialogFragment.Companion.REQUEST_LOGIN_CONFIRM
 import soup.gdg.navigation.sample.ui.setOnNavigationViewClickListener
+import soup.gdg.navigation.sample.ui.web.WebScene
 import soup.gdg.navigation.sample.util.clipToOval
 import soup.gdg.navigation.sample.util.lazyUnsafe
 
@@ -52,8 +53,10 @@ class HomeFragment : Fragment(), OnBackPressedListener {
                     )
                     R.id.nav_github -> findNavController().navigate(
                         HomeFragmentDirections.actionToWeb(
-                            title = "Github",
-                            url = "https://github.com/fornewid/GDGAndroid-atPangyo-2019-Navigation-Sample"
+                            WebScene(
+                                title = "Github",
+                                url = "https://github.com/fornewid/GDGAndroid-atPangyo-2019-Navigation-Sample"
+                            )
                         )
                     )
                 }
