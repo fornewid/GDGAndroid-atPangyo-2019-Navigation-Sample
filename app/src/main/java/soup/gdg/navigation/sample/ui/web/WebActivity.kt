@@ -13,7 +13,7 @@ class WebActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web)
-        toolbar.title = args.title ?: args.url
-        webView.loadUrl(args.url)
+        toolbar.title = args.data.title ?: "No Title"
+        webView.loadUrl(args.data.url)
     }
 }

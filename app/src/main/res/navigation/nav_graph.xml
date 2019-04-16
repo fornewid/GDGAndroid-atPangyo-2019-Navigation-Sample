@@ -82,15 +82,8 @@
         tools:layout="@layout/activity_web">
 
         <argument
-            android:name="title"
-            android:defaultValue="null"
-            app:argType="string"
-            app:nullable="true" />
-
-        <argument
-            android:name="url"
-            app:argType="string"
-            app:nullable="false" />
+            android:name="data"
+            app:argType="soup.gdg.navigation.sample.ui.web.WebScene" />
     </activity>
 
     <include app:graph="@navigation/nav_graph_profile" />
