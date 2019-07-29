@@ -5,11 +5,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.plusAssign
 import kotlinx.android.synthetic.main.activity_main.*
 import soup.gdg.navigation.sample.NavigationDirections
 import soup.gdg.navigation.sample.R
-import soup.gdg.navigation.sample.navigation.DialogFragmentNavigator
 import soup.gdg.navigation.sample.ui.splash.SplashFragmentDirections
 
 class MainActivity : AppCompatActivity(), LoadingViewOwner {
@@ -25,22 +23,12 @@ class MainActivity : AppCompatActivity(), LoadingViewOwner {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initNavController()
         intent?.handleDeepLinkInCustom()
     }
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         intent?.handleDeepLinkInCustom()
-    }
-
-    private fun initNavController() {
-        navHostFragment.run {
-            val navController = findNavController()
-            navController.navigatorProvider +=
-                DialogFragmentNavigator(requireContext(), childFragmentManager)
-            navController.setGraph(R.navigation.nav_graph)
-        }
     }
 
     private fun Intent.handleDeepLinkInCustom() {
